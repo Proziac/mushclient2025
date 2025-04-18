@@ -42,27 +42,6 @@ MUSHclientQt/
 
 ---
 
-## Build Instructions
-
-### Dependencies
-
-- Qt 6 (`qtbase`, `qtnetwork`, `qtmultimedia`)
-- CMake 3.16+
-- Lua 5.4
-- sol2 (or LuaBridge)
-
-### Building
-
-```bash
-git clone https://github.com/Proziac/MUSHclientQt.git
-cd MUSHclientQt
-mkdir build && cd build
-cmake ..
-cmake --build .
-```
-
----
-
 ## Development Roadmap
 
 ### Phase 1: Project Bootstrap & Core Extraction
