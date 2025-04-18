@@ -54,7 +54,7 @@ MUSHclientQt/
 ### Building
 
 ```bash
-git clone https://github.com/yourusername/MUSHclientQt.git
+git clone https://github.com/Proziac/MUSHclientQt.git
 cd MUSHclientQt
 mkdir build && cd build
 cmake ..
