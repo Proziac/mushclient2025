@@ -15,22 +15,23 @@
     <RootNamespace>MUSHclient</RootNamespace>
     <Keyword>MFCProj</Keyword>
     <ProjectName>MUSHclient</ProjectName>
-    <WindowsTargetPlatformVersion>
-    </WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <GenerateManifest>false</GenerateManifest>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -72,8 +73,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)luacom\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_32BIT_TIME_T;_WIN32_WINNT=0x0501;NO_HTMLHELP;_DEBUG;WIN32;_WINDOWS;LUA51;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;NO_WARN_MBCS_MFC_DEPRECATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)luacom\;$(SolutionDir)openssl\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0501;NO_HTMLHELP;_DEBUG;WIN32;_WINDOWS;LUA51;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;NO_WARN_MBCS_MFC_DEPRECATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -95,7 +96,8 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>dsound.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dsound.lib;Shlwapi.lib;libssl.lib;libcrypto.lib;Crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)openssl\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OutputFile>$(SolutionDir).\WinDebug\MUSHclient.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -123,8 +125,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)luacom\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_32BIT_TIME_T;_WIN32_WINNT=0x0501;NO_HTMLHELP;NDEBUG;WIN32;_WINDOWS;ZLIB_DLL;LUA51;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;NO_WARN_MBCS_MFC_DEPRECATION;$(PRE_RELEASE);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)luacom\;$(SolutionDir)openssl\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0501;NO_HTMLHELP;NDEBUG;WIN32;_WINDOWS;ZLIB_DLL;LUA51;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;NO_WARN_MBCS_MFC_DEPRECATION;$(PRE_RELEASE);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -149,7 +151,8 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>dsound.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dsound.lib;Shlwapi.lib;libssl.lib;libcrypto.lib;Crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)openssl\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <OutputFile>$(SolutionDir).\WinRel\MUSHclient.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ProgramDatabaseFile>.\WinRel/MUSHclient.pdb</ProgramDatabaseFile>
@@ -1277,7 +1280,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="sqlite3\sqlite3.c">
+    <ClCompile Include="sqlite3\sqlite3_wrapper.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -1458,4 +1461,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+
+  <ItemGroup>
+    <ApplicationManifest Include="MUSHclient.exe.manifest" />
+  </ItemGroup>
 </Project>

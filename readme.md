@@ -1,104 +1,53 @@
-# MUSHclient Qt Port
+MUSHclient source
+=================
 
-**A modern, cross-platform Qt-powered port of MUSHclient**, the powerful MUD client for Windows. This project preserves the core functionality and extensibility of MUSHclient while updating the UI, networking, and plugin architecture using modern C++ and Qt 6.
+Published to GitHub on 21st. January 2010
 
----
+Author: Nick Gammon
 
-## Goals
+This software is released under the conditions in the file docs/agreement.txt
 
-- Cross-platform (Windows, Linux, macOS) MUD client
-- Full-featured Telnet + SSL support
-- Lua scripting (via sol2 or LuaBridge)
-- Plugin architecture with dynamic loading
-- Modern UI with tabs, logging, color parsing, and customization
-- Backward compatibility with core MUSHclient logic where possible
 
----
+To compile
+----------
 
-## Project Layout
+Certain directories only have skeleton files. These are because the "real" files are in separate libraries which you can download for yourself.
 
-```
-MUSHclientQt/
-├── app/              # Entry point, app controller
-├── gui/              # Main window, preferences, custom widgets
-├── network/          # Telnet, SSL, MCCP, session handling
-├── scripting/        # Lua engine and script interfaces
-├── plugins/          # Plugin loader, sandbox, lifecycle hooks
-├── core/             # Triggers, aliases, macros, state machine
-├── assets/           # Icons, styles, themes
-├── CMakeLists.txt
-└── README.md
-```
+These libraries are (along with their home pages):
 
----
+* pcre	  - <http://www.pcre.org/>
+* png	  - <http://www.libpng.org/pub/png/libpng.html>
+* sqlite  - <http://www.sqlite.org/>
+* zlib	  - <http://www.zlib.net/>
 
-## Tech Stack
+In each of those folders is a **readme.txt** file which explains where to get the relevant libraries, and any minor adjustments needed to make them work with MUSHclient.
 
-- **C++17**
-- **Qt 6 (Widgets + Network + Multimedia)**
-- **Lua 5.4** via [sol2](https://github.com/ThePhD/sol2)
-- **zlib** for MCCP
-- **CMake** for build system
+To run
+------
 
----
+You need to copy various files from the standard MUSHclient distribution release in order to test the compiled code.
 
-## Development Roadmap
+They are not part of the source distribution because they are not, strictly speaking, the "source" required to compile it.
 
-### Phase 1: Project Bootstrap & Core Extraction
-- [x] Create Qt CMake structure
-- [x] Begin migrating reusable core logic (triggers, world state)
+These files should be copied into the place where MUSHclient.exe was put by the compiler. In my case this would be the WinRel or WinDebug directories.
 
-### Phase 2: UI Shell with Qt
-- [ ] Build tabbed main window
-- [ ] Add input box + styled output
-- [ ] Integrate layout themes
+* Files
 
-### Phase 3: Networking
-- [ ] Replace CAsyncSocket with QTcpSocket
-- [ ] Integrate QSslSocket for TLS
-- [ ] Port Telnet negotiation + MCCP
+	* lua5.1.dll  - for Lua scripting
+	* mushclient.hlp - help file
+	* mushclient.cnt - help table of contents
+	* tips.txt - tips shown at startup
+	* spellchecker.lua - Lua file that does the spell checking (loaded at startup)
 
-### Phase 4: Lua Scripting
-- [ ] Add Lua interpreter via sol2
-- [ ] Bind core API to Lua
-- [ ] Add live scripting console
+* Directories
 
-### Phase 5: Plugin System
-- [ ] Dynamic plugin loader
-- [ ] Lua plugin hooks: connect, install, tick, etc.
-- [ ] Plugin manager UI
+	* **locale** directory (this has the resources file en.dll which contains menus, dialogs etc.)
+	* **spell** directory (so the spell checker can find its dictionaries)
+	* **lua** directory (if you are planning to use any Lua modules like "tprint")
 
-### Phase 6: Profiles & Config
-- [ ] Replace registry with QSettings
-- [ ] Preferences window
-- [ ] Load/save world XML
+Resources
+---------
 
-### Phase 7: Feature Completeness
-- [ ] Aliases/macros engine
-- [ ] Sound support
-- [ ] Logging & scripting output
+The resources used by MUSHclient are in the file en.dll (which resides in the directory "locale" mentioned above). To rebuild file you need to download the project	mushclient_resources which is on GitHub:
 
----
-
-## Screenshots
-
-*(Coming soon)*
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Credits
-
-Based on [MUSHclient](http://www.gammon.com.au/mushclient) by Nick Gammon.  
-Qt port and modernization by Proziac.
-
----
-
-## Contributions
-
-PRs and ideas are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) (coming soon).
+<https://github.com/nickgammon/mushclient_resources>
